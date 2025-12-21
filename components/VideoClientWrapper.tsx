@@ -16,7 +16,7 @@ const CLIENT_LOGOS = [
     { name: "Massad", src: "/logos/massad.png", href: "https://www.instagram.com/massad.co?igsh=MTFuc2pqcjdoeGl6dw==" },
     { name: "Shaafi", src: "/logos/shaafi.png", href: "https://www.instagram.com/alshafie_company?igsh=MTVpNjhuZDl4eDJieA==" },
     { name: "Amore", src: "/logos/amore.png", href: "https://www.instagram.com/amorepizza1?igsh=MTkzY3k5bDN2a2V1MQ==" },
-    { name: "Rida Market", src: "/logos/ridamarket.png", href: "#" }, // Placeholder as requested
+    { name: "Rida Market", src: "/logos/ridamarket.png", href: "https://www.instagram.com/super_marker_reda?igsh=MXd3dnNtMnhudHFqdQ%3D%3D&utm_source=qr" },
 ];
 
 export default function VideoClientWrapper() {
