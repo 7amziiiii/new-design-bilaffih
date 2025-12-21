@@ -27,11 +27,19 @@ export default function VideoClientWrapper() {
     const [isMuted, setIsMuted] = useState(true);
 
     useEffect(() => {
-        // Attempt autoplay
+        // Attempt autoplay and sync state
         if (videoRef.current) {
-            videoRef.current.play().catch((err) => {
-                console.log("Autoplay blocked:", err);
-            });
+            // Check if already playing (e.g. from autoPlay attribute)
+            if (!videoRef.current.paused) {
+                setIsPlaying(true);
+            }
+
+            videoRef.current.play()
+                .then(() => setIsPlaying(true))
+                .catch((err) => {
+                    console.log("Autoplay blocked:", err);
+                    setIsPlaying(false);
+                });
         }
     }, []);
 
@@ -92,6 +100,9 @@ export default function VideoClientWrapper() {
                 className="w-full h-full object-cover"
                 src="/video.mp4"
                 playsInline
+                webkit-playsinline="true"
+                autoPlay
+                preload="auto"
                 muted={isMuted}
                 onEnded={handleVideoEnd}
                 onPlay={onPlay}
@@ -115,6 +126,17 @@ export default function VideoClientWrapper() {
                     >
                         <Grip size={16} /> Links
                     </button>
+                </div>
+            )}
+
+            {/* Play Button (Fallback if autoplay blocked or paused) */}
+            {!isPlaying && !showOverlay && (
+                <div
+                    className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+                >
+                    <div className="bg-black/30 backdrop-blur-sm p-4 rounded-full border border-white/20 animate-pulse">
+                        <Play size={32} className="text-white fill-white translate-x-1" />
+                    </div>
                 </div>
             )}
 
