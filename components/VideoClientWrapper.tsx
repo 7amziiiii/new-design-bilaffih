@@ -115,12 +115,6 @@ export default function VideoClientWrapper() {
             {!showOverlay && (
                 <div className="absolute top-4 right-4 flex gap-2 z-10 transition-opacity duration-300">
                     <button
-                        onClick={() => setIsMuted(!isMuted)}
-                        className="bg-black/40 backdrop-blur-md p-2 rounded-full text-white/80 hover:text-white hover:bg-black/60 transition-all"
-                    >
-                        {isMuted ? "🔇" : "🔊"}
-                    </button>
-                    <button
                         onClick={toggleOverlay}
                         className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full text-white/90 font-medium text-sm border border-white/10 hover:bg-black/60 transition-all flex items-center gap-2"
                     >
@@ -142,9 +136,11 @@ export default function VideoClientWrapper() {
 
             {/* Overlay Layer */}
             <div
-                className={`absolute inset-0 bg-black/80 backdrop-blur-lg flex flex-col items-center justify-between p-6 z-20 transition-all duration-700 ease-in-out ${showOverlay ? "overlay-visible" : "overlay-hidden"
+                className={`absolute inset-0 bg-black/60 backdrop-blur-lg flex flex-col items-center justify-between p-6 z-20 transition-all duration-700 ease-in-out ${showOverlay ? "overlay-visible" : "overlay-hidden"
                     }`}
             >
+                {/* Slight white tint overlay for better contrast */}
+                <div className="absolute inset-0 bg-white/5 pointer-events-none" />
                 {/* Close Button */}
                 <button
                     onClick={toggleOverlay}

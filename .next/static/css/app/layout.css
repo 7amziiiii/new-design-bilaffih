@@ -688,6 +688,9 @@ video {
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
 }
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
+}
 .fill-white {
   fill: #fff;
 }
