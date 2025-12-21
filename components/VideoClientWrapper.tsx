@@ -160,8 +160,8 @@ export default function VideoClientWrapper() {
                                 rel="noopener noreferrer"
                                 className={`group flex items-center justify-center overflow-hidden rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 aspect-[5/3] relative ${
                                     // Custom size adjustments via padding
-                                    logo.name === 'Shaafi' ? 'p-6' :
-                                        logo.name === 'Rainbow' ? 'p-1' : 'p-2'
+                                    // logo.name === 'Shaafi' ? 'p-6' :
+                                    logo.name === 'Rainbow' ? 'p-1' : 'p-2'
                                     } ${
                                     // Center the last item (Rida Market):
                                     // Mobile (2 cols): Span 2, width ~50% (minus gap) to match others.
