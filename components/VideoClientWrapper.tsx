@@ -27,20 +27,33 @@ export default function VideoClientWrapper() {
     const [isMuted, setIsMuted] = useState(true);
 
     useEffect(() => {
-        // Attempt autoplay and sync state
-        if (videoRef.current) {
-            // Check if already playing (e.g. from autoPlay attribute)
-            if (!videoRef.current.paused) {
-                setIsPlaying(true);
-            }
+        const video = videoRef.current;
+        if (!video) return;
 
-            videoRef.current.play()
-                .then(() => setIsPlaying(true))
+        // iOS Safari Requirement: Always set muted property directly
+        video.muted = true;
+
+        // Attempt autoplay
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    setIsPlaying(true);
+                })
                 .catch((err) => {
-                    console.log("Autoplay blocked:", err);
+                    console.log("Autoplay blocked or failed:", err);
                     setIsPlaying(false);
                 });
         }
+
+        // Sync state if already playing
+        const handleSync = () => {
+            if (!video.paused) setIsPlaying(true);
+        };
+
+        video.addEventListener('play', handleSync);
+        return () => video.removeEventListener('play', handleSync);
     }, []);
 
     const handleTimeUpdate = () => {
@@ -98,8 +111,8 @@ export default function VideoClientWrapper() {
             <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
+                src="/video.mp4"
                 playsInline
-                webkit-playsinline="true"
                 autoPlay
                 muted
                 preload="auto"
@@ -108,10 +121,7 @@ export default function VideoClientWrapper() {
                 onPause={onPause}
                 onTimeUpdate={handleTimeUpdate}
                 onClick={handlePlayPause}
-            >
-                <source src="/video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            />
 
             {/* Controls (Visible when overlay is hidden) */}
             {!showOverlay && (
