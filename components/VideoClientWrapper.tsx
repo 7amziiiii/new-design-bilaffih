@@ -85,7 +85,7 @@ export default function VideoClientWrapper() {
     };
 
     return (
-        <div className="relative w-full max-w-md md:max-w-2xl lg:max-w-4xl aspect-[9/16] md:aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 mx-auto">
+        <div className="relative w-full max-w-md md:max-w-[calc(100vh*9/16)] h-[85vh] md:h-[90vh] bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 mx-auto">
             {/* Video Layer */}
             <video
                 ref={videoRef}
@@ -151,18 +151,23 @@ export default function VideoClientWrapper() {
                 </div>
 
                 <div className="w-full flex-1 flex flex-col items-center justify-center min-h-0">
-                    <div className="grid grid-cols-2 gap-2 w-full max-w-sm px-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6 w-full max-w-sm md:max-w-5xl px-4">
                         {CLIENT_LOGOS.map((logo, idx) => (
                             <Link
                                 key={logo.name}
                                 href={logo.href}
                                 target={logo.href !== '#' ? "_blank" : undefined}
                                 rel="noopener noreferrer"
-                                className={`group flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 aspect-[5/3] relative ${
-                                    // Center the last item (Rida Market) in a 2-column grid
-                                    // We make it span full width (2 cols) but restrict its width to 50% (minus gap adjustment)
+                                className={`group flex items-center justify-center overflow-hidden rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 aspect-[5/3] relative ${
+                                    // Custom size adjustments via padding
+                                    logo.name === 'Shaafi' ? 'p-6' :
+                                        logo.name === 'Rainbow' ? 'p-1' : 'p-2'
+                                    } ${
+                                    // Center the last item (Rida Market):
+                                    // Mobile (2 cols): Span 2, width ~50% (minus gap) to match others.
+                                    // Desktop (3 cols): 7 items total. 2 rows of 3. Last item is on 3rd row. Center it (col-start-2).
                                     idx === CLIENT_LOGOS.length - 1
-                                        ? 'col-span-2 w-[calc(50%-0.25rem)] mx-auto'
+                                        ? 'col-span-2 w-[calc(50%-0.25rem)] mx-auto md:w-full md:col-span-1 md:col-start-2 md:mx-0'
                                         : ''
                                     }`}
                             >

@@ -1,9 +1,13 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "New Design - Concept",
+    title: "حملة بلفة",
     description: "New Design Advertising Agency",
+    icons: {
+        icon: "/logos/bilafih.png",
+    },
 };
 
 export default function RootLayout({
