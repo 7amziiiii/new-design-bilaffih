@@ -98,18 +98,20 @@ export default function VideoClientWrapper() {
             <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
-                src="/video.mp4"
                 playsInline
                 webkit-playsinline="true"
                 autoPlay
+                muted
                 preload="auto"
-                muted={isMuted}
                 onEnded={handleVideoEnd}
                 onPlay={onPlay}
                 onPause={onPause}
                 onTimeUpdate={handleTimeUpdate}
-                onClick={handlePlayPause} // Click video to play/pause when overlay is hidden
-            />
+                onClick={handlePlayPause}
+            >
+                <source src="/video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
 
             {/* Controls (Visible when overlay is hidden) */}
             {!showOverlay && (
@@ -126,10 +128,11 @@ export default function VideoClientWrapper() {
             {/* Play Button (Fallback if autoplay blocked or paused) */}
             {!isPlaying && !showOverlay && (
                 <div
-                    className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+                    className="absolute inset-0 z-30 flex items-center justify-center pointer-events-auto cursor-pointer"
+                    onClick={handlePlayPause}
                 >
-                    <div className="bg-black/30 backdrop-blur-sm p-4 rounded-full border border-white/20 animate-pulse">
-                        <Play size={32} className="text-white fill-white translate-x-1" />
+                    <div className="bg-black/30 backdrop-blur-sm p-6 rounded-full border border-white/20 animate-pulse hover:scale-110 transition-transform">
+                        <Play size={48} className="text-white fill-white translate-x-1" />
                     </div>
                 </div>
             )}
@@ -222,16 +225,7 @@ export default function VideoClientWrapper() {
                 </div>
             </div>
 
-            {/* Play Button Overlay (if paused and no overlay) */}
-            {!isPlaying && !showOverlay && !videoEnded && (
-                <div
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                >
-                    <div className="bg-black/30 backdrop-blur-sm p-4 rounded-full border border-white/20">
-                        <Play size={32} fill="white" className="text-white ml-1" />
-                    </div>
-                </div>
-            )}
+
 
         </div>
     );
