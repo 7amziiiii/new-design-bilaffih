@@ -27,33 +27,12 @@ export default function VideoClientWrapper() {
     const [isMuted, setIsMuted] = useState(true);
 
     useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        // iOS Safari Requirement: Always set muted property directly
-        video.muted = true;
-
         // Attempt autoplay
-        const playPromise = video.play();
-
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    setIsPlaying(true);
-                })
-                .catch((err) => {
-                    console.log("Autoplay blocked or failed:", err);
-                    setIsPlaying(false);
-                });
+        if (videoRef.current) {
+            videoRef.current.play().catch((err) => {
+                console.log("Autoplay blocked:", err);
+            });
         }
-
-        // Sync state if already playing
-        const handleSync = () => {
-            if (!video.paused) setIsPlaying(true);
-        };
-
-        video.addEventListener('play', handleSync);
-        return () => video.removeEventListener('play', handleSync);
     }, []);
 
     const handleTimeUpdate = () => {
@@ -111,21 +90,25 @@ export default function VideoClientWrapper() {
             <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
-                src="/video.mp4"
+                src="/video.mov"
                 playsInline
-                autoPlay
-                muted
-                preload="auto"
+                muted={isMuted}
                 onEnded={handleVideoEnd}
                 onPlay={onPlay}
                 onPause={onPause}
                 onTimeUpdate={handleTimeUpdate}
-                onClick={handlePlayPause}
+                onClick={handlePlayPause} // Click video to play/pause when overlay is hidden
             />
 
             {/* Controls (Visible when overlay is hidden) */}
             {!showOverlay && (
                 <div className="absolute top-4 right-4 flex gap-2 z-10 transition-opacity duration-300">
+                    <button
+                        onClick={() => setIsMuted(!isMuted)}
+                        className="bg-black/40 backdrop-blur-md p-2 rounded-full text-white/80 hover:text-white hover:bg-black/60 transition-all"
+                    >
+                        {isMuted ? "🔇" : "🔊"}
+                    </button>
                     <button
                         onClick={toggleOverlay}
                         className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full text-white/90 font-medium text-sm border border-white/10 hover:bg-black/60 transition-all flex items-center gap-2"
@@ -135,25 +118,11 @@ export default function VideoClientWrapper() {
                 </div>
             )}
 
-            {/* Play Button (Fallback if autoplay blocked or paused) */}
-            {!isPlaying && !showOverlay && (
-                <div
-                    className="absolute inset-0 z-30 flex items-center justify-center pointer-events-auto cursor-pointer"
-                    onClick={handlePlayPause}
-                >
-                    <div className="bg-black/30 backdrop-blur-sm p-6 rounded-full border border-white/20 animate-pulse hover:scale-110 transition-transform">
-                        <Play size={48} className="text-white fill-white translate-x-1" />
-                    </div>
-                </div>
-            )}
-
             {/* Overlay Layer */}
             <div
-                className={`absolute inset-0 bg-black/60 backdrop-blur-lg flex flex-col items-center justify-between p-6 z-20 transition-all duration-700 ease-in-out ${showOverlay ? "overlay-visible" : "overlay-hidden"
+                className={`absolute inset-0 bg-black/80 backdrop-blur-lg flex flex-col items-center justify-between p-6 z-20 transition-all duration-700 ease-in-out ${showOverlay ? "overlay-visible" : "overlay-hidden"
                     }`}
             >
-                {/* Slight white tint overlay for better contrast */}
-                <div className="absolute inset-0 bg-white/5 pointer-events-none" />
                 {/* Close Button */}
                 <button
                     onClick={toggleOverlay}
@@ -235,7 +204,16 @@ export default function VideoClientWrapper() {
                 </div>
             </div>
 
-
+            {/* Play Button Overlay (if paused and no overlay) */}
+            {!isPlaying && !showOverlay && !videoEnded && (
+                <div
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                    <div className="bg-black/30 backdrop-blur-sm p-4 rounded-full border border-white/20">
+                        <Play size={32} fill="white" className="text-white ml-1" />
+                    </div>
+                </div>
+            )}
 
         </div>
     );
