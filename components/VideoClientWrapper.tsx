@@ -10,13 +10,13 @@ import { Play, RotateCcw, X, Grip } from "lucide-react";
 // Bottom: Bilafih
 // Middle: The rest
 const CLIENT_LOGOS = [
-    { name: "Fried Chicken", src: "/logos/friedchicken.png", href: "https://www.instagram.com/fraide_chiken?igsh=MTBhanh5d3ZvMTQ2Zg==" },
-    { name: "Rainbow", src: "/logos/rainbow.png", href: "https://www.instagram.com/rainbow.cafe.jenin?igsh=czQxNGx6ejh3M2t5" },
-    { name: "Sinara", src: "/logos/sinara.png", href: "https://www.instagram.com/sinaramall?igsh=MXg2NmVwc201OTlyZQ==" },
-    { name: "Massad", src: "/logos/massad.png", href: "https://www.instagram.com/massad.co?igsh=MTFuc2pqcjdoeGl6dw==" },
-    { name: "Shaafi", src: "/logos/shaafi.png", href: "https://www.instagram.com/alshafie_company?igsh=MTVpNjhuZDl4eDJieA==" },
-    { name: "Amore", src: "/logos/amore.png", href: "https://www.instagram.com/amorepizza1?igsh=MTkzY3k5bDN2a2V1MQ==" },
-    { name: "Rida Market", src: "/logos/ridamarket.png", href: "https://www.instagram.com/super_marker_reda?igsh=MXd3dnNtMnhudHFqdQ%3D%3D&utm_source=qr" },
+    { name: "Fried Chicken", src: "/logos/friedchicken.png", href: "https://www.instagram.com/fraide_chiken" },
+    { name: "Rainbow", src: "/logos/rainbow.png", href: "https://www.instagram.com/rainbow.cafe.jenin" },
+    { name: "Sinara", src: "/logos/sinara.png", href: "https://www.instagram.com/sinaramall" },
+    { name: "Massad", src: "/logos/massad.png", href: "https://www.instagram.com/massad.co" },
+    { name: "Shaafi", src: "/logos/shaafi.png", href: "https://www.instagram.com/alshafie_company" },
+    { name: "Amore", src: "/logos/amore.png", href: "https://www.instagram.com/amorepizza1" },
+    { name: "Rida Market", src: "/logos/ridamarket.png", href: "https://www.instagram.com/super_marker_reda" },
 ];
 
 export default function VideoClientWrapper() {
@@ -188,7 +188,7 @@ export default function VideoClientWrapper() {
                 <div className="flex flex-col items-center gap-6 mb-4 w-full">
                     {/* Signature Logo */}
                     <Link
-                        href="https://www.instagram.com/belfa.campaign?igsh=MTM2MmYwYzg4OXNubw%3D%3D&utm_source=qr"
+                        href="https://www.instagram.com/belfa.campaign"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative w-full max-w-[12rem] h-16 p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300"
