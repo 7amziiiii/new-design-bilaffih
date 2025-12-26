@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function SubscribedPage() {
     const [timeLeft, setTimeLeft] = useState<{
@@ -89,16 +89,24 @@ export default function SubscribedPage() {
             <div className="z-10 flex flex-col items-center text-center p-8 max-w-2xl w-full">
                 <div className="mb-8 relative">
                     <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
-                    <CheckCircle className="w-24 h-24 text-green-500 relative z-10" />
+                    <Image
+                        src="/logos/bilafih.png"
+                        alt="Bilafih Logo"
+                        width={140}
+                        height={140}
+                        className="relative z-10 object-contain drop-shadow-2xl"
+                    />
                 </div>
 
-                <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-6 pb-2">
+                {/* <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-6 pb-2">
                     تم الاشتراك بنجاح!
-                </h1>
+                </h1> */}
 
                 <p className="text-lg md:text-xl text-white/60 mb-12">
-                    شكراً لانضمامك إلينا. شيء مذهل قادم قريباً.
+                    شكراً لإهتمامك.   باقي على السحب:
+
                 </p>
+
 
                 {/* Countdown Timer */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full" dir="ltr">
