@@ -17,6 +17,7 @@ const CLIENT_LOGOS = [
     { name: "Shaafi", src: "/logos/shaafi.png", href: "https://www.instagram.com/alshafie_company" },
     { name: "Amore", src: "/logos/amore.png", href: "https://www.instagram.com/amorepizza1" },
     { name: "Rida Market", src: "/logos/ridamarket.png", href: "https://www.instagram.com/super_marker_reda" },
+    { name: "Juana Design", src: "/logos/jwana-design.png", href: "https://www.instagram.com/juana.design7" },
 ];
 
 export default function VideoClientWrapper() {
@@ -160,15 +161,7 @@ export default function VideoClientWrapper() {
                                 rel="noopener noreferrer"
                                 className={`group flex items-center justify-center overflow-hidden rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 aspect-[5/3] relative ${
                                     // Custom size adjustments via padding
-                                    // logo.name === 'Shaafi' ? 'p-6' :
                                     logo.name === 'Rainbow' ? 'p-1' : 'p-2'
-                                    } ${
-                                    // Center the last item (Rida Market):
-                                    // Mobile (2 cols): Span 2, width ~50% (minus gap) to match others.
-                                    // Desktop (3 cols): 7 items total. 2 rows of 3. Last item is on 3rd row. Center it (col-start-2).
-                                    idx === CLIENT_LOGOS.length - 1
-                                        ? 'col-span-2 w-[calc(50%-0.25rem)] mx-auto md:w-full md:col-span-1 md:col-start-2 md:mx-0'
-                                        : ''
                                     }`}
                             >
                                 <div className="relative w-full h-full flex items-center justify-center">
