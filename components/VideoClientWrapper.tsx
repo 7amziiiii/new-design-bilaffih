@@ -181,7 +181,7 @@ export default function VideoClientWrapper() {
                 <div className="flex flex-col items-center gap-6 mb-4 w-full">
                     {/* Signature Logo */}
                     <Link
-                        href="https://www.instagram.com/belfa.campaign"
+                        href="https://www.instagram.com/blaffe_campaign"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative w-full max-w-[12rem] h-16 p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300"
